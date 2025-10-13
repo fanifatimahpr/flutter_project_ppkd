@@ -6,8 +6,8 @@ class Tugas1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 192, 216, 228),
-      appBar: AppBar(title: Text("Profil Saya"), backgroundColor: Colors.blue),
+      backgroundColor: const Color.fromARGB(255, 231, 219, 219),
+      appBar: AppBar(title: Text("Profil Saya", style: TextStyle(color: const Color.fromARGB(255, 241, 238, 238)),), backgroundColor: const Color.fromARGB(255, 110, 44, 44), ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
