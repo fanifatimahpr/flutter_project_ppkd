@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2016/aboutappPage.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2016/syaratketentuan_Page.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2016/tugas8.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/tugas5.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/tugas6.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2016/tugas7.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/tugasBottomNavigator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +37,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Tugas6(),
+      home: Tugas8(),
     );
   }
 }

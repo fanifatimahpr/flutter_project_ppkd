@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/homeScreen.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/textTestWidget.dart';
 
 class Tugas6 extends StatefulWidget {
@@ -127,7 +128,11 @@ class _Tugas6State extends State<Tugas6> {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xfff8623a)),
-            onPressed: (){}, 
+            onPressed: (){
+              Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Homescreen()),
+                );
+            }, 
             child: SizedBox(
               width: 300,
               height: 50,
