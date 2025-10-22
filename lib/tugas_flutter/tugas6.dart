@@ -186,8 +186,8 @@ class _Tugas6State extends State<Tugas6> {
                       width: 110,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset("assets/images/google2.png", height: 40, width: 40,),                 
+                        children: [Image.asset("assets/images/google2.png", height: 40, width: 40,),
+                                           
                           Text("Google",style: TextStyle(fontSize: 14, color: Colors.black)),
                         ],
                       ),
