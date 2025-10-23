@@ -7,6 +7,7 @@ import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/listviewmap.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/listviewmodel.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/tugas10.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/tugas9.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2018/splashscreen.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/tugas5.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/tugas6.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2016/tugas7.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Tugas10(),
+      home: Splashscreen(),
     );
   }
 }

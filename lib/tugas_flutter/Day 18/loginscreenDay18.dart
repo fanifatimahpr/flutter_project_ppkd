@@ -4,14 +4,14 @@ import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/nextPageDaftar.dart'
 import 'package:flutter_project_ppkd/tugas_flutter/homeScreen.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/textTestWidget.dart';
 
-class Tugas10 extends StatefulWidget {
-  const Tugas10({super.key});
+class Loginscreenday18 extends StatefulWidget {
+  const Loginscreenday18 ({super.key});
 
   @override
-  State<Tugas10> createState() => _Tugas10State();
+  State<Loginscreenday18> createState() => _Loginscreenday18State();
 }
 
-class _Tugas10State extends State<Tugas10> {
+class _Loginscreenday18State extends State<Loginscreenday18 > {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
