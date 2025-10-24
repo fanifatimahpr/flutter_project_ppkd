@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2018/loginscreenDay18.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2018/preferencehandler.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2019/view/signup_page.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -24,13 +25,13 @@ class _SplashscreenState extends State<Splashscreen> {
       if (isLogin != null && isLogin == true) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => Loginscreenday18()),
+          MaterialPageRoute(builder: (context) => SignupPageStuntinq()),
           (route) => false,
         );
       } else {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => Loginscreenday18()),
+          MaterialPageRoute(builder: (context) => SignupPageStuntinq()),
           (route) => false,
         );
       }

@@ -1,29 +1,26 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/listview.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/nextPageDaftar.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/homeScreen.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/textTestWidget.dart';
 
-class Loginscreenday18 extends StatefulWidget {
-  const Loginscreenday18 ({super.key});
+class SignupPageStuntinq extends StatefulWidget {
+  const SignupPageStuntinq  ({super.key});
 
   @override
-  State<Loginscreenday18> createState() => _Loginscreenday18State();
+  State<SignupPageStuntinq > createState() => _SignupPageStuntinqState();
 }
-
-class _Loginscreenday18State extends State<Loginscreenday18 > {
-  final TextEditingController nameController = TextEditingController();
+class _SignupPageStuntinqState extends State<SignupPageStuntinq>  {
+  final TextEditingController fullnameController = TextEditingController();
+  final TextEditingController phonenumberController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController cityController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   bool isVisibility = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 214, 240, 238),
-      appBar: AppBar(title: Text("Formulir Pendaftaran Kelas Flutter", 
-      style: TextStyle(fontWeight: FontWeight.bold)), 
-      backgroundColor: Color.fromARGB(255, 167, 235, 229)),
       body: Stack(children: [buildLayer()]));
   }
   // login() async {
@@ -42,19 +39,19 @@ SafeArea buildLayer() {
         padding: const EdgeInsets.all(20.0),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-               Text("Mohon isi form ini sesuai instruksi", 
+              Image.asset('assets/images/Logo StuntinQ.png', height: 20, width: 20,),
+              Text("Sign Up", 
                 style: TextStyle(
-                  fontSize: 22, 
+                  color: Color(0xff2f6b6a),
+                  fontSize: 28, 
                   fontWeight: FontWeight.bold)),
             
-            height(20),
-            buildTitle("Name"),
-            height(10),
+            height(30),
         buildTextField(
-                  hintText: "Enter your full name",
-                  controller: nameController,
+                  hintText: "Full name",
+                  controller: fullnameController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Nama harus diisi";
@@ -65,10 +62,20 @@ SafeArea buildLayer() {
 
 
         height(15),
-        buildTitle("Email"),
-        height(10),
         buildTextField(
-                  hintText: "Enter your email",
+                  hintText: "Phone Number",
+                  controller: phonenumberController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Nomor telepon harus diisi";
+                    } 
+                    return null;
+                  },
+                ),
+        
+        height(15),
+        buildTextField(
+                  hintText: "Email Adress",
                   controller: emailController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -83,22 +90,16 @@ SafeArea buildLayer() {
                     return null;
                   },
                 ),
-        
-        height(15),
-        buildTitle("Phone Number"),
-        height(10),
-        buildTextField(
-                  hintText: "Enter your phone number"),
 
         height(15),
-        buildTitle("City Of Domicile"),
-        height(10),
         buildTextField(
-          hintText: "Enter your city of domicile",
-          controller: cityController,
+          hintText: "Password",
+          controller: passwordController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Kota domisili harus diisi";
+                      return "Password harus diisi";
+                    } else if (value.length < 6) {
+                      return "Password minimal 6 karakter";
                     }
                     return null;
                   },),
@@ -108,13 +109,15 @@ SafeArea buildLayer() {
         Container(
           width: 417.21,
           height: 48.14,
-          decoration: BoxDecoration(color: Color.fromARGB(255, 167, 235, 229), borderRadius: BorderRadius.circular(10.7)),
+          decoration: 
+          BoxDecoration(color: Color(0xff2f6b6a), 
+          borderRadius: BorderRadius.circular(12)),
           child: TextButton(onPressed: (){
             if(_formKey.currentState!.validate()) {
-              print(nameController.text);
+              print(fullnameController.text);
               Navigator.push(context,
               MaterialPageRoute(builder: (context) =>
-              nextPage(name: nameController.text, city: cityController.text,),),);
+              nextPage(name: fullnameController.text, city: phonenumberController.text,),),);
             }
             else {
               showDialog(context: context,
@@ -134,13 +137,17 @@ SafeArea buildLayer() {
               });
             }
           }, 
-          child: Text("Daftar", 
+
+          child: Text("Sign Up", 
           style: TextStyle(
-            fontSize: 21.74, 
-            color: Colors.black, 
+            fontSize: 18, 
+            color: Colors.white, 
             fontWeight: FontWeight.bold))),
-            ),],
+          ),
+            ],
             ),
+
+            
           ),
         ),
       ),
@@ -212,13 +219,3 @@ SafeArea buildLayer() {
              
 }
 }
-SizedBox height(double height) => SizedBox(height: height);
-  SizedBox width(double width) => SizedBox(width: width);
-
-  Widget buildTitle(String text) {
-    return Row(
-      children: [
-        // Text(text, style: TextStyle(fontSize: 12, color: AppColor.gray88)),
-      ],
-    );
-  }
