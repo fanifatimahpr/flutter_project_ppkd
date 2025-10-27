@@ -52,11 +52,11 @@ class _SplashscreenState extends State<Splashscreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(child: Image.asset("assets/images/book.png", height: 80, width: 80,),),
+            Center(child: Image.asset("assets/images/Logo StuntinQ.png", height: 80, width: 80,),),
             Text(
-              "My Apps",
+              "StuntinQ",
               style: TextStyle(
-                fontSize: 24, 
+                fontSize: 28, 
                 fontWeight: FontWeight.bold),
             ),
           ],

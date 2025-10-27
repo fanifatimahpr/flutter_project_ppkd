@@ -3,48 +3,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project_ppkd/loginbutton.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/listview.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/nextPageDaftar.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2018/preferencehandler.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2019/database/dbhelper.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2019/model/usermodel.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2019/view/drawerday19.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2019/view/signin_page.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2019/view/signup_page.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/homeScreen.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/textTestWidget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class SignupPageStuntinq extends StatefulWidget {
-  const SignupPageStuntinq  ({super.key});
-  static const id = "/Sign Up";
+class SigninPageStuntinq extends StatefulWidget {
+  const SigninPageStuntinq  ({super.key});
 
- 
-  State<SignupPageStuntinq > createState() => _SignupPageStuntinqState();
+  @override
+  State<SigninPageStuntinq > createState() => _SigninPageStuntinqState();
 }
-class _SignupPageStuntinqState extends State<SignupPageStuntinq>  {
-  final TextEditingController fullnameController = TextEditingController();
-  final TextEditingController phonenumberController = TextEditingController();
+class _SigninPageStuntinqState extends State<SigninPageStuntinq>  {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool isVisibility = false;
-  bool isFilled = false;
-
-  @override
-  void initState() {
-    super.initState();
-    emailController.addListener(_checkFields);
-    passwordController.addListener(_checkFields);
-  }
-
-  void _checkFields() {
-    setState(() {
-      isFilled =
-          emailController.text.isNotEmpty && passwordController.text.isNotEmpty;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [buildLayer()]));
   }
-
+  
 final _formKey = GlobalKey<FormState>();
 SafeArea buildLayer() {
   return SafeArea(
@@ -57,36 +42,11 @@ SafeArea buildLayer() {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('assets/images/Logo StuntinQ.png', height: 80, width: 80,),
-              Text("Sign Up", 
+              Text("Sign In", 
                 style: TextStyle(
                   color: Color(0xff2f6b6a),
                   fontSize: 28, 
                   fontWeight: FontWeight.bold)),
-            
-            height(30),
-        buildTextField(
-                  hintText: "Full name",
-                  controller: fullnameController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Nama harus diisi";
-                    }
-                    return null;
-                  },
-                ),
-
-
-        height(15),
-        buildTextField(
-                  hintText: "Phone Number",
-                  controller: phonenumberController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Nomor telepon harus diisi";
-                    } 
-                    return null;
-                  },
-                ),
         
         height(15),
         buildTextField(
@@ -118,25 +78,34 @@ SafeArea buildLayer() {
                     }
                     return null;
                   },),
-        height(25),
 
-        //Sign Up
+        SizedBox(height: 30,),
+
+        //Sign In
         LoginButton(
-          text: "Sign Up",
-          onPressed: () {
+          text: "Sign In",
+          onPressed: () async {
             if(_formKey.currentState!.validate()) {
-              
-              final UserModel data = UserModel(
-                fullname: fullnameController.text, 
-                phonenumber: phonenumberController.text, 
+              print(emailController.text);
+              PreferenceHandler.saveLogin(true);
+              final data = await DBHelper.loginUser(
                 email: emailController.text, 
                 password: passwordController.text,);
-              DBHelper.registerUser(data);
-              Fluttertoast.showToast(msg: "Sign Up Berhasil");
-              Navigator.pop(context);
-            } else {}
-          },),
+              if (data != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DrawerWidgetDay19(),
+                          ),
 
+                        );
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: "Email atau password salah",
+                        );
+                      }
+            
+          }}),
           height(25),
           //Or Sign In
           Row(
@@ -169,7 +138,7 @@ SafeArea buildLayer() {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Have an account?",
+              Text("Don't Have an account?",
               style: TextStyle(
                 fontSize: 12, 
                 color: const Color.fromARGB(255, 97, 97, 97)),
@@ -177,10 +146,10 @@ SafeArea buildLayer() {
               TextButton(
               onPressed: (){
                 Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SigninPageStuntinq()),
+              context, MaterialPageRoute(builder: (context) => SignupPageStuntinq()),
               );
               }, 
-              child: Text("Sign In",
+              child: Text("Sign Up",
                 style: TextStyle(
                 fontSize: 12,
                 color: Color(0xff2f6b6a),
