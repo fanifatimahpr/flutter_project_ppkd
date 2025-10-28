@@ -5,15 +5,16 @@ class UserModel {
   int? id;
   String fullname;
   String email;
-  String phonenumber;
-  String password;
+  String? phonenumber;
+  String? password;
 
   UserModel({
     this.id,
     required this.fullname,
     required this.email,
-    required this.phonenumber,
-    required this.password,
+     this.phonenumber,
+     this.password,
+    
   });
 
   Map<String, dynamic> toMap() {

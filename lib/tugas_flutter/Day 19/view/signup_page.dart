@@ -11,13 +11,13 @@ import 'package:flutter_project_ppkd/tugas_flutter/textTestWidget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class SignupPageStuntinq extends StatefulWidget {
-  const SignupPageStuntinq  ({super.key});
+  const SignupPageStuntinq({super.key});
   static const id = "/Sign Up";
 
- 
-  State<SignupPageStuntinq > createState() => _SignupPageStuntinqState();
+  State<SignupPageStuntinq> createState() => _SignupPageStuntinqState();
 }
-class _SignupPageStuntinqState extends State<SignupPageStuntinq>  {
+
+class _SignupPageStuntinqState extends State<SignupPageStuntinq> {
   final TextEditingController fullnameController = TextEditingController();
   final TextEditingController phonenumberController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -41,30 +41,36 @@ class _SignupPageStuntinqState extends State<SignupPageStuntinq>  {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(children: [buildLayer()]));
+    return Scaffold(body: Stack(children: [buildLayer()]));
   }
 
-final _formKey = GlobalKey<FormState>();
-SafeArea buildLayer() {
-  return SafeArea(
-    child: Form(
-      key: _formKey,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/Logo StuntinQ.png', height: 80, width: 80,),
-              Text("Sign Up", 
-                style: TextStyle(
-                  color: Color(0xff2f6b6a),
-                  fontSize: 28, 
-                  fontWeight: FontWeight.bold)),
-            
-            height(30),
-        buildTextField(
+  final _formKey = GlobalKey<FormState>();
+  SafeArea buildLayer() {
+    return SafeArea(
+      child: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/Logo StuntinQ.png',
+                  height: 80,
+                  width: 80,
+                ),
+                Text(
+                  "Sign Up",
+                  style: TextStyle(
+                    color: Color(0xff2f6b6a),
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                height(30),
+                buildTextField(
                   hintText: "Full name",
                   controller: fullnameController,
                   validator: (value) {
@@ -75,21 +81,20 @@ SafeArea buildLayer() {
                   },
                 ),
 
-
-        height(15),
-        buildTextField(
+                height(15),
+                buildTextField(
                   hintText: "Phone Number",
                   controller: phonenumberController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Nomor telepon harus diisi";
-                    } 
+                    }
                     return null;
                   },
                 ),
-        
-        height(15),
-        buildTextField(
+
+                height(15),
+                buildTextField(
                   hintText: "Email Adress",
                   controller: emailController,
                   validator: (value) {
@@ -106,10 +111,10 @@ SafeArea buildLayer() {
                   },
                 ),
 
-        height(15),
-        buildTextField(
-          hintText: "Password",
-          controller: passwordController,
+                height(15),
+                buildTextField(
+                  hintText: "Password",
+                  controller: passwordController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Password harus diisi";
@@ -117,83 +122,102 @@ SafeArea buildLayer() {
                       return "Password minimal 6 karakter";
                     }
                     return null;
-                  },),
-        height(25),
+                  },
+                ),
+                height(25),
 
-        //Sign Up
-        LoginButton(
-          text: "Sign Up",
-          onPressed: () {
-            if(_formKey.currentState!.validate()) {
-              
-              final UserModel data = UserModel(
-                fullname: fullnameController.text, 
-                phonenumber: phonenumberController.text, 
-                email: emailController.text, 
-                password: passwordController.text,);
-              DBHelper.registerUser(data);
-              Fluttertoast.showToast(msg: "Sign Up Berhasil");
-              Navigator.pop(context);
-            } else {}
-          },),
+                //Sign Up
+                LoginButton(
+                  text: "Sign Up",
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      final UserModel data = UserModel(
+                        fullname: fullnameController.text,
+                        phonenumber: phonenumberController.text,
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                      DBHelper.registerUser(data);
+                      Fluttertoast.showToast(msg: "Sign Up Berhasil");
+                      Navigator.pop(context);
+                    } else {}
+                  },
+                ),
 
-          height(25),
-          //Or Sign In
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Divider(thickness: 1,),
-                )),
-            Text("Or Sign In With",
-          style: TextStyle(
-            fontSize: 13, 
-            color: const Color.fromARGB(255, 97, 97, 97)
-            ),),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Divider(thickness: 1,),
-            )),
-            ],
+                height(25),
+                //Or Sign In
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Divider(thickness: 1),
+                      ),
+                    ),
+                    Text(
+                      "Or Sign In With",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: const Color.fromARGB(255, 97, 97, 97),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Divider(thickness: 1),
+                      ),
+                    ),
+                  ],
+                ),
+                height(15),
+
+                //Google logo
+                Center(
+                  child: Image.asset(
+                    "assets/images/google2.png",
+                    height: 40,
+                    width: 40,
+                  ),
+                ),
+
+                //have an account
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Have an account?",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: const Color.fromARGB(255, 97, 97, 97),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SigninPageStuntinq(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Sign In",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xff2f6b6a),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          height(15),
-
-          //Google logo
-          Center(
-            child: Image.asset("assets/images/google2.png", height: 40, width: 40,)),
-
-
-          //have an account
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Have an account?",
-              style: TextStyle(
-                fontSize: 12, 
-                color: const Color.fromARGB(255, 97, 97, 97)),
-              ),
-              TextButton(
-              onPressed: (){
-                Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SigninPageStuntinq()),
-              );
-              }, 
-              child: Text("Sign In",
-                style: TextStyle(
-                fontSize: 12,
-                color: Color(0xff2f6b6a),
-                fontWeight: FontWeight.bold),
-              )), 
-            ],
-          ),
-
-       
-      ]),
-    ))));
+        ),
+      ),
+    );
   }
-
 
   TextFormField buildTextField({
     String? hintText,
@@ -248,12 +272,10 @@ SafeArea buildLayer() {
   Widget buildTitle(String text) {
     return Row(
       children: [
-        Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-        // Text(text, style: TextStyle(fontSize: 12, color: AppColor.gray88)),
-              
+        Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
 
-              ],
-            );
-             
-}
+        // Text(text, style: TextStyle(fontSize: 12, color: AppColor.gray88)),
+      ],
+    );
+  }
 }
