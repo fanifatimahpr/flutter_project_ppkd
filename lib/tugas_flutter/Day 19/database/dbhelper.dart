@@ -48,8 +48,9 @@ class DBHelper {
 
   //GET USER
   static Future<List<UserModel>> getAllUser() async {
-    final dbs = await db();
-    final List<Map<String, dynamic>> results = await dbs.query(tableUser);
+    final dbs = await db();    
+    final List<Map<String, dynamic>> results = await 
+  dbs.query(tableUser);
     print(results.map((e) => UserModel.fromMap(e)).toList());
     return results.map((e) => UserModel.fromMap(e)).toList();
   }

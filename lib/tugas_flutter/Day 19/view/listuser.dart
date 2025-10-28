@@ -42,7 +42,7 @@ class _ListUserPageState extends State<ListUserPage> {
                           children: [
                             ListTile(
                               title: Text(items.fullname??""),
-                              subtitle: Text(items.email??""),
+                              subtitle: Text(items.email),
                             ),
                           ],
                         );

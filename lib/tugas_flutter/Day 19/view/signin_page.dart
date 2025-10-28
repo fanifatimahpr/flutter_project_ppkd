@@ -14,42 +14,56 @@ import 'package:flutter_project_ppkd/tugas_flutter/textTestWidget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class SigninPageStuntinq extends StatefulWidget {
-  const SigninPageStuntinq  ({super.key});
+  const SigninPageStuntinq({super.key});
 
   @override
-  State<SigninPageStuntinq > createState() => _SigninPageStuntinqState();
+  State<SigninPageStuntinq> createState() => _SigninPageStuntinqState();
 }
-class _SigninPageStuntinqState extends State<SigninPageStuntinq>  {
+
+class _SigninPageStuntinqState extends State<SigninPageStuntinq> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool isVisibility = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(children: [buildLayer()]));
+    return Scaffold(body: Stack(children: [buildBackground(), buildLayer()]));
   }
-  
-final _formKey = GlobalKey<FormState>();
-SafeArea buildLayer() {
-  return SafeArea(
-    child: Form(
-      key: _formKey,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/Logo StuntinQ.png', height: 80, width: 80,),
-              Text("Sign In", 
-                style: TextStyle(
-                  color: Color(0xff2f6b6a),
-                  fontSize: 28, 
-                  fontWeight: FontWeight.bold)),
-        
-        height(15),
-        buildTextField(
+
+  login() async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DrawerWidgetDay19()),
+    );
+  }
+
+  final _formKey = GlobalKey<FormState>();
+  SafeArea buildLayer() {
+    return SafeArea(
+      child: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/Logo StuntinQ.png',
+                  height: 80,
+                  width: 80,
+                ),
+                Text(
+                  "Sign In",
+                  style: TextStyle(
+                    color: Color(0xff2f6b6a),
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                height(15),
+                buildTextField(
                   hintText: "Email Adress",
                   controller: emailController,
                   validator: (value) {
@@ -66,10 +80,10 @@ SafeArea buildLayer() {
                   },
                 ),
 
-        height(15),
-        buildTextField(
-          hintText: "Password",
-          controller: passwordController,
+                height(15),
+                buildTextField(
+                  hintText: "Password",
+                  controller: passwordController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Password harus diisi";
@@ -77,92 +91,140 @@ SafeArea buildLayer() {
                       return "Password minimal 6 karakter";
                     }
                     return null;
-                  },),
+                  },
+                ),
 
-        SizedBox(height: 30,),
+                SizedBox(height: 30),
 
-        //Sign In
-        LoginButton(
-          text: "Sign In",
-          onPressed: () async {
-            if(_formKey.currentState!.validate()) {
-              print(emailController.text);
-              PreferenceHandler.saveLogin(true);
-              final data = await DBHelper.loginUser(
-                email: emailController.text, 
-                password: passwordController.text,);
-              if (data != null) {
+                //Sign In
+                LoginButton(
+                  text: "Sign In",
+                  onPressed: () async {
+                    final data = await DBHelper.loginUser(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                    if (_formKey.currentState!.validate()) {
+                      print(emailController.text);
+                      PreferenceHandler.saveLogin(true);
+                      // final data = await DBHelper.loginUser(
+                      //   email: emailController.text,
+                      //   password: passwordController.text,
+                      // );
+                      if (data != null) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => DrawerWidgetDay19(),
                           ),
-
                         );
                       } else {
                         Fluttertoast.showToast(
                           msg: "Email atau password salah",
                         );
                       }
-            
-          }}),
-          height(25),
-          //Or Sign In
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Divider(thickness: 1,),
-                )),
-            Text("Or Sign In With",
-          style: TextStyle(
-            fontSize: 13, 
-            color: const Color.fromARGB(255, 97, 97, 97)
-            ),),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Divider(thickness: 1,),
-            )),
-            ],
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Validation Error"),
+                            content: Text("Please fill all fields"),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Yes"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+                  },
+                ),
+                height(25),
+                //Or Sign In
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Divider(thickness: 1),
+                      ),
+                    ),
+                    Text(
+                      "Or Sign In With",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: const Color.fromARGB(255, 97, 97, 97),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Divider(thickness: 1),
+                      ),
+                    ),
+                  ],
+                ),
+                height(15),
+
+                //Google logo
+                Center(
+                  child: Image.asset(
+                    "assets/images/google2.png",
+                    height: 40,
+                    width: 40,
+                  ),
+                ),
+
+                //have an account
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't Have an account?",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: const Color.fromARGB(255, 97, 97, 97),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignupPageStuntinq(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Sign Up",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xff2f6b6a),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          height(15),
-
-          //Google logo
-          Center(
-            child: Image.asset("assets/images/google2.png", height: 40, width: 40,)),
-
-
-          //have an account
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Don't Have an account?",
-              style: TextStyle(
-                fontSize: 12, 
-                color: const Color.fromARGB(255, 97, 97, 97)),
-              ),
-              TextButton(
-              onPressed: (){
-                Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SignupPageStuntinq()),
-              );
-              }, 
-              child: Text("Sign Up",
-                style: TextStyle(
-                fontSize: 12,
-                color: Color(0xff2f6b6a),
-                fontWeight: FontWeight.bold),
-              )), 
-            ],
-          ),
-
-       
-      ]),
-    ))));
+        ),
+      ),
+    );
   }
-
+  Container buildBackground() {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      
+    );
+  }
 
   TextFormField buildTextField({
     String? hintText,
@@ -217,12 +279,10 @@ SafeArea buildLayer() {
   Widget buildTitle(String text) {
     return Row(
       children: [
-        Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-        // Text(text, style: TextStyle(fontSize: 12, color: AppColor.gray88)),
-              
+        Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
 
-              ],
-            );
-             
-}
+        // Text(text, style: TextStyle(fontSize: 12, color: AppColor.gray88)),
+      ],
+    );
+  }
 }
