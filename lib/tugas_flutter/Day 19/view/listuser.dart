@@ -65,7 +65,7 @@ class _ListUserPageState extends State<ListUserPage> {
       );
       DBHelper.updateUser(updated);
       getData();
-      Fluttertoast.showToast(msg: "Data berhasil di update");
+      Fluttertoast.showToast(msg: "Data has been updated");
     }
   }
 
@@ -80,7 +80,7 @@ class _ListUserPageState extends State<ListUserPage> {
             spacing: 12,
             children: [
               Text(
-                "Apakah anda yakin ingin menghapus data ${user.fullname}?",
+                "Are you sure wan't to delete data ${user.fullname}?",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ],
@@ -90,13 +90,13 @@ class _ListUserPageState extends State<ListUserPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Jangan"),
+              child: Text("No"),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context, true);
               },
-              child: Text("Ya, hapus aja"),
+              child: Text("Delete"),
             ),
           ],
         );
@@ -106,73 +106,117 @@ class _ListUserPageState extends State<ListUserPage> {
     if (res == true) {
       DBHelper.deleteUser(user.id!);
       getData();
-      Fluttertoast.showToast(msg: "Data berhasil di hapus");
+      Fluttertoast.showToast(msg: "Data has been deleted");
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text("List User")),
-      body: Padding(
-        padding: const EdgeInsets.all(14.0),
+       body: 
+      // Container(
+      //   decoration: BoxDecoration(
+      //     gradient: LinearGradient(
+      //       colors: [Color(0xff2f6b6a), Color(0xff40e0d0)],
+      //       begin: AlignmentGeometry.topLeft,
+      //       end: AlignmentGeometry.bottomRight,
+      //     ),
+      //   ),
+      Container(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 12,
           children: [
-            Text("List User", 
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-               Expanded(
-                 child: FutureBuilder(
-                   future: DBHelper.getAllUser(),
-                   builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    // print(snapshot.data);
-                     if (snapshot.connectionState == ConnectionState.waiting) {
-                       return CircularProgressIndicator();
-                     } else if (snapshot.data == null || snapshot.data.isEmpty) {
-                       return Column(
-                         children: [
-                           Text("Data belum ada"),
-                         ],
-                       );
-                     } else {
-                       final data = snapshot.data as List<UserModel>;
-                       return ListView.builder(
-                         itemCount: data.length,
-                         itemBuilder: (BuildContext context, int index) {
-                           final items = data[index];
-                           return Column(
-                             children: [
-                               ListTile(
-                                 title: Text(items.fullname),
-                                 subtitle: Text(items.email),
-                                 trailing: Row(
-                                   mainAxisSize: MainAxisSize.min,
-                                   children: [
-                                     IconButton(
-                                       onPressed: () {
-                                         _onEdit(items);
-                                       },
-                                       icon: Icon(Icons.edit),
-                                     ),
-                                     IconButton(
-                                       onPressed: () {
-                                         _onDelete(items);
-                                       },
-                                       icon: Icon(Icons.delete,),
-                                     ),
-                                   ],
-                                 ),
-                               )
-                             ],
-                           );
-                         },
-                       );
-                           }}),
-               )],           
+            height(10),
+            Text('Daftar User:', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+            FutureBuilder(
+              future: DBHelper.getAllUser(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else if (snapshot.data == null || snapshot.data.isEmpty) {
+                  return Column(
+                    children: [
+                      Text("Data belum ada"),
+                    ],
+                  );
+                } else {
+                  final data = snapshot.data as List<UserModel>;
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final items = data[index];
+                        return Column(
+                          children: [
+                            ListTile(title: Text(items.fullname??''),
+                              subtitle: Text(items.email??''),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      _onEdit(items);
+                                    },
+                                    icon: Icon(Icons.edit),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      _onDelete(items);
+                                    },
+                                    icon: Icon(
+                                      Icons.delete,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  );
+                }
+              },
             ),
+          ],
+        ),
       ),
-               ); }
-              }
+      );
+  }
+
+TextFormField buildTextField({
+    String? hintText,
+    bool isPassword = false,
+    TextEditingController? controller,
+    String? Function(String?)? validator,
+  }) {
+    return TextFormField(
+      validator: validator,
+      controller: controller,
+      decoration: InputDecoration(
+        hintText: hintText,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32),
+          borderSide: BorderSide(
+            color: Colors.black.withOpacity(0.2),
+            width: 1.0,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32),
+          borderSide: BorderSide(color: Colors.black, width: 1.0),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32),
+          borderSide: BorderSide(
+            color: Colors.black.withOpacity(0.2),
+            width: 1.0,
+          ),
+        ),
+      ),
+    );
+  }}         
+              
             
 TextFormField buildTextField({
     String? hintText,

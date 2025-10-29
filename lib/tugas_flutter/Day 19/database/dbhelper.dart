@@ -64,7 +64,7 @@ class DBHelper {
     final List<Map<String, dynamic>> results = await 
   dbs.query(tableUser);
     print(results.map((e) => UserModel.fromMap(e)).toList());
-    return results.map((e) => UserModel.fromMap(e)).toList();
+     return results.map((e) => UserModel.fromMap(e)).toList();
   }
   //UPDATE USER
  static Future<void> updateUser(UserModel user) async {
