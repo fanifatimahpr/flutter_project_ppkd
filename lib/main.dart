@@ -1,23 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2016/aboutappPage.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2016/syaratketentuan_Page.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2016/tugas8.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/listview.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/listviewmap.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/listviewmodel.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/tugas10.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2017/tugas9.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2018/loginscreenDay18.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2018/splashscreen.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2019/view/drawerday19.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2019/view/signin_page.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2019/view/signup_page.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2019/view/splash_page.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2031/View/screen.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/tugas5.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/tugas6.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/Day%2016/tugas7.dart';
-import 'package:flutter_project_ppkd/tugas_flutter/tugasBottomNavigator.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/views/register_day33.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/views/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,6 +32,6 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Tugas14());
+      home: SplashScreenDay33());
   }
 }

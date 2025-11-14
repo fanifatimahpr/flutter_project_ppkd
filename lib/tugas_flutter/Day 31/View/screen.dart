@@ -29,7 +29,6 @@ class _Tugas14State extends State<Tugas14> {
     return Scaffold(
       body: _widgetOptions[_selectedIndex],
 
-      // 🔹 Gunakan warna background yang match dengan UserScreen2
       backgroundColor: const Color(0xff141414),
 
       bottomNavigationBar: BottomNavigationBar(
