@@ -4,6 +4,7 @@ import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/models/loginmodel.da
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/models/registermodel.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/preferences/preference_handler.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/service/api.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/views/profil_day33.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/views/register_day33.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -292,7 +293,7 @@ class _SigninPageDay33State extends State<SigninPageDay33> {
 
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => DrawerWidgetDay19()),
+                    MaterialPageRoute(builder: (_) => ProfilDay33()),
                   );
                 } else {
                   _showErrorSnackbar("Gagal mendapatkan token");

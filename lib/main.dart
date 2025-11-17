@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/views/profil_day33.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/views/register_day33.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/views/splash_screen.dart';
 
@@ -32,6 +33,6 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: SplashScreenDay33());
+      home: ProfilDay33());
   }
 }

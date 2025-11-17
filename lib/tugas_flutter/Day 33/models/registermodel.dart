@@ -28,49 +28,6 @@ class RegisterModel {
     };
 }
 
-// class LoginModel {
-//   final bool success;
-//   final String message;
-//   final String token;
-//   final User user;
-
-//   LoginModel({
-//     required this.success,
-//     required this.message,
-//     required this.token,
-//     required this.user,
-//   });
-
-//   factory LoginModel.fromJson(Map<String, dynamic> json) {
-//     return LoginModel(
-//       success: json["success"],
-//       message: json["message"],
-//       token: json["token"],
-//       user: User.fromJson(json["user"]),
-//     );
-//   }
-// }
-
-// class EditUserModel {
-//   final bool success;
-//   final String message;
-//   final Data data;
-
-//   EditUserModel({
-//     required this.success,
-//     required this.message,
-//     required this.data,
-//   });
-
-//   factory EditUserModel.fromJson(Map<String, dynamic> json) {
-//     return EditUserModel(
-//       success: json["success"],
-//       message: json["message"],
-//       data: Data.fromJson(json["data"]),
-//     );
-//   }
-// }
-
 class Data {
     String? token;
     User? user;

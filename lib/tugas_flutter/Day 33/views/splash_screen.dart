@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2019/view/drawerday19.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/preferences/preference_handler.dart';
+import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/views/profil_day33.dart';
 import 'package:flutter_project_ppkd/tugas_flutter/Day%2033/views/register_day33.dart';
 
 class SplashScreenDay33 extends StatefulWidget {
@@ -24,7 +25,7 @@ print(isLogin);
 if (isLogin != null && isLogin == true) {
 Navigator.pushAndRemoveUntil(
 context,
-MaterialPageRoute(builder: (context) => DrawerWidgetDay19()),
+MaterialPageRoute(builder: (context) => ProfilDay33()),
 (route) => false,
 );
 } else {

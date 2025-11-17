@@ -21,12 +21,6 @@ class Profile {
   Map<String, dynamic> toJson() => {"message": message, "data": data?.toJson()};
 }
 
-// To parse this JSON data, do
-//
-//     final profileModel = profileModelFromJson(jsonString);
-
-// import 'dart:convert';
-
 ProfileModel profileModelFromJson(String str) =>
     ProfileModel.fromJson(json.decode(str));
 
@@ -34,19 +28,19 @@ String profileModelToJson(ProfileModel data) => json.encode(data.toJson());
 
 class ProfileModel {
   String? message;
-  Data? data;
+  ProfilData? data;
 
   ProfileModel({this.message, this.data});
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
     message: json["message"],
-    data: json["data"] == null ? null : Data.fromJson(json["data"]),
+    data: json["data"] == null ? null : ProfilData.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {"message": message, "data": data?.toJson()};
 }
 
-class Data {
+class ProfilData {
   int? id;
   String? name;
   String? email;
@@ -54,7 +48,7 @@ class Data {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  Data({
+  ProfilData({
     this.id,
     this.name,
     this.email,
@@ -63,7 +57,7 @@ class Data {
     this.updatedAt,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory ProfilData.fromJson(Map<String, dynamic> json) => ProfilData(
     id: json["id"],
     name: json["name"],
     email: json["email"],
